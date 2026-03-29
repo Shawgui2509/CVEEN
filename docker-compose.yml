@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tp_cven_app
+    ports:
+      - "8080:80"
+    environment:
+      CI_ENVIRONMENT: development
+      MONGODB_URI: ${MONGODB_URI:-}
+      MONGODB_DATABASE: ${MONGODB_DATABASE:-tp_cven}
+    volumes:
+      - ./:/var/www/html

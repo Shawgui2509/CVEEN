@@ -1,0 +1,22 @@
+[
+  {
+    "typelogement": "studio",
+    "nblitdouble": "N",
+    "nblitsimple": "N"
+  },
+  {
+    "typelogement": "villa",
+    "nblitdouble": "N",
+    "nblitsimple": "N"
+  },
+  {
+    "typelogement": "appartement",
+    "nblitdouble": "N",
+    "nblitsimple": "N"
+  },
+  {
+    "typelogement": "chalet",
+    "nblitdouble": "N",
+    "nblitsimple": "N"
+  }
+]

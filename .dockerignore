@@ -1,0 +1,10 @@
+.git
+.gitignore
+.vscode
+nbproject
+writable/cache/*
+writable/logs/*
+writable/session/*
+vendor
+node_modules
+mongo_export

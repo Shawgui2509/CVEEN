@@ -1,0 +1,13 @@
+[
+  {
+    "id_reservation": 30,
+    "datedebut": "2025-09-23",
+    "datefin": "2025-09-27",
+    "nbpersonne": 1,
+    "pension": "N",
+    "menage": true,
+    "valide": "Annulee",
+    "id_user": 6,
+    "typelogement": "studio"
+  }
+]

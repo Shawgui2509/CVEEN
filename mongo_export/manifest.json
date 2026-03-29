@@ -1,0 +1,22 @@
+[
+  {
+    "table": "mon_schema.users",
+    "file": "mon_schema.users.json",
+    "count": 0
+  },
+  {
+    "table": "public.reservation",
+    "file": "public.reservation.json",
+    "count": 1
+  },
+  {
+    "table": "public.typelogement",
+    "file": "public.typelogement.json",
+    "count": 4
+  },
+  {
+    "table": "public.users",
+    "file": "public.users.json",
+    "count": 7
+  }
+]
