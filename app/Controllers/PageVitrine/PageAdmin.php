@@ -1,8 +1,9 @@
 <?php 
 
-namespace App\Controllers;
+namespace App\Controllers\PageVitrine;
 
 use App\Models\SiteReservationModel;
+use App\Controllers\BaseController;
 
 class PageAdmin extends BaseController
 {
@@ -18,20 +19,21 @@ class PageAdmin extends BaseController
 
     public function index() 
     {
-        if (!$this->session->has('id_user') || $this->session->get('role') !== 'admin') {
+        $isAdmin = $this->session->get('role') === 'admin' || (int) $this->session->get('id_user') === 1;
+        if (!$this->session->has('id_user') || !$isAdmin) {
             return redirect()->to(site_url('Connexion'));
         }
 
         $idReservation = $this->request->getPost('idReservation');
-        if (!empty($idReservation) && is_numeric($idReservation)) {
-            $this->siteReservationModel->updateisValide($idReservation, "Annulée");
-            return redirect()->to(site_url('PageAdmin'))->with('success', 'Réservation annulée avec succès.');
+        $action = $this->request->getPost('action');
+
+        if (!empty($idReservation) && is_numeric($idReservation) && in_array($action, ['valider', 'annuler'], true)) {
+            $newStatus = $action === 'valider' ? 'Validee' : 'Annulee';
+            $this->siteReservationModel->updateisValide($idReservation, $newStatus);
+            return redirect()->to(site_url('PageAdmin'))->with('success', 'Reservation mise a jour avec succes.');
         }
 
         echo view('template/header', ['iduser' => $this->session->get('id_user')]);
-        echo view("form/pageadmin", [
-            'tabReservation' => $this->siteReservationModel->getLesReservationsByUser($this->session->get('id_user'))
-        ]);
         echo view("form/pageadmin", [
             'tabReservation' => $this->siteReservationModel->getAllReservationsWithUser()
         ]);

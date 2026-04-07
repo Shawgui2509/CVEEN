@@ -21,7 +21,7 @@
                     <th scope="col">Nombre de personnes</th>
                     <th scope="col">Pension</th>
                     <th scope="col">État de la réservation</th>
-                    <th scope="col">Annuler</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,22 +29,25 @@
                 if (isset($tabReservation) && !empty($tabReservation)) {
                     foreach ($tabReservation as $LesReservations) {
                         echo "<tr>";
-                        echo "<td>{$LesReservations->nom}</td>";
-                        echo "<td>{$LesReservations->datedebut}</td>";
-                        echo "<td>{$LesReservations->nbpersonne}</td>";
-                        echo "<td>{$LesReservations->pension}</td>";
-                        echo "<td>{$LesReservations->valide}</td>";
+                        echo "<td>{$LesReservations['nom']}</td>";
+                        echo "<td>{$LesReservations['datedebut']}</td>";
+                        echo "<td>{$LesReservations['nbpersonne']}</td>";
+                        echo "<td>{$LesReservations['pension']}</td>";
+                        echo "<td>{$LesReservations['valide']}</td>";
                         echo "<td>";
 
-                        if ($LesReservations->valide === "En attente de validation" || $LesReservations->valide === "Modifiée") {
-                            echo '<form method="post" action="PageUser">';
-                            echo '<input type="hidden" name="idReservation" value="'.$LesReservations->id_reservation.'">';
-                            echo '<button type="submit" name="supprimer" class="btn btn-danger btn-sm">';
+                        if ($LesReservations['valide'] === "En attente de validation" || $LesReservations['valide'] === "Modifiee") {
+                            echo '<form method="post" action="'.site_url('PageAdmin').'" class="d-flex gap-2">';
+                            echo '<input type="hidden" name="idReservation" value="'.$LesReservations['id_reservation'].'">';
+                            echo '<button type="submit" name="action" value="valider" class="btn btn-success btn-sm">';
+                            echo '<i class="fa fa-check-circle"></i> Valider';
+                            echo '</button>';
+                            echo '<button type="submit" name="action" value="annuler" class="btn btn-danger btn-sm">';
                             echo '<i class="fa fa-times-circle"></i> Annuler';
                             echo '</button>';
                             echo '</form>';
                          } else {
-                            echo '<span class="text-danger">Annulation impossible <i class="fa fa-exclamation-circle"></i></span>';
+                            echo '<span class="text-muted">Aucune action disponible</span>';
             }
             
             echo "</td>";

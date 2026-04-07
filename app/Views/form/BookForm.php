@@ -356,7 +356,7 @@
                         <p class="offer-card-dates">16 avr. - 22 avr.</p>
                     </div>
                 </div>
-                <button class="offer-card-button" onclick="window.location.href='test'">Consulter l'offre</button>
+                <button class="offer-card-button" onclick="window.location.href='offre1'">Consulter l'offre</button>
             </div>
         </div>
         <div class="offer-card">
