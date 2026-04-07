@@ -19,7 +19,7 @@ class PageAdmin extends BaseController
 
     public function index() 
     {
-        $isAdmin = $this->session->get('role') === 'admin';
+        $isAdmin = strtolower(trim((string) $this->session->get('role'))) === 'admin';
         if (!$this->session->has('id_user') || !$isAdmin) {
             return redirect()->to(site_url('Connexion'));
         }
