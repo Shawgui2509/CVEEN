@@ -27,9 +27,10 @@ $routes->get('noface2', 'CeviController::index');
 $routes->get('noface3', 'ViceController::index');
 $routes->get('noface4', 'TesttController::index');
 
-$routes->get('offre2', 'OffreController2::index');
-$routes->get('offre1', 'OffreController::index');
-$routes->get('offre3', 'OffreController3::index');
+$routes->get('offre1', 'Offre::offre1');
+$routes->get('offre2', 'Offre::offre2');
+$routes->get('offre3', 'Offre::offre3');
+$routes->get('confirmation', 'Home::confirmation');
 
 
 /**
@@ -64,11 +65,17 @@ $routes->post('register', 'CreateUser::register'); // Alias pour l'inscription
 // Autres routes
 $routes->get('/PageUser', 'PageUser::index'); // Assure-toi que cette ligne existe !
 $routes->post('/PageUser', 'PageUser::index'); // Si la page reçoit des requêtes POST
+$routes->get('/PageAdmin', 'PageVitrine\\PageAdmin::index');
+$routes->post('/PageAdmin', 'PageVitrine\\PageAdmin::index');
+$routes->get('/GestionReservation', 'PageVitrine\\PageAdmin::index');
+$routes->post('/GestionReservation', 'PageVitrine\\PageAdmin::index');
+$routes->post('reservation/create', 'ReservationController::create');
 $routes->get('BookForm', 'FormController::BookForm');
 
 $routes->get('/Offre', 'Offre::index');
-$routes->get('/Offre/offre2', 'Offre::offre2'); // Changez POST en GET
-$routes->get('/Offre/offre3', 'Offre::offre3'); // Ajoutez la route pour offre3
+$routes->get('/Offre/offre1', 'Offre::offre1');
+$routes->get('/Offre/offre2', 'Offre::offre2');
+$routes->get('/Offre/offre3', 'Offre::offre3');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

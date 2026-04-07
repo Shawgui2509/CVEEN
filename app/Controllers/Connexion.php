@@ -68,6 +68,7 @@ class Connexion extends Controller
             'id_user'   => $user['id_user'],
             'nom'       => $user['nom'],
             'email'     => $user['email'],
+            'role'      => $user['role'] ?? 'user',
             'logged_in' => true
         ]);
 

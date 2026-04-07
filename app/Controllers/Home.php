@@ -14,6 +14,11 @@ class Home extends BaseController
 		echo view('welcome_message');
 	}
 
+        public function confirmation()
+        {
+                echo view('Offre/confirmation');
+        }
+
 	//--------------------------------------------------------------------
 
 }

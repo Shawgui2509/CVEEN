@@ -295,9 +295,10 @@
             const adults = parseInt(document.getElementById("adultCount").textContent);
             const children = parseInt(document.getElementById("childCount").textContent);
             const babies = parseInt(document.getElementById("babyCount").textContent);
+            const totalTravellers = adults + children + babies;
 
             // Vérifiez si tous les champs sont remplis
-            if (!arrivalDate || !departureDate || (adults + children + babies === 0)) {
+            if (!arrivalDate || !departureDate || totalTravellers === 0) {
                 errorNotification.style.display = "block";
                 setTimeout(() => {
                     errorNotification.style.display = "none";
@@ -305,10 +306,36 @@
                 return; // Arrêtez l'exécution si la réservation est incomplète
             }
 
-            notification.style.display = "block";
-            setTimeout(() => {
-                window.location.href = "confirmation.html"; // Changez vers votre page de confirmation
-            }, 2000); // Attendez 2 secondes avant de rediriger
+            fetch("<?= site_url('reservation/create'); ?>", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    datedebut: arrivalDate,
+                    datefin: departureDate,
+                    nbpersonne: totalTravellers,
+                    pension: "N",
+                    typelogement: "chambre_double"
+                })
+            })
+                .then((response) => response.json().then((data) => ({ ok: response.ok, data })))
+                .then(({ ok, data }) => {
+                    if (!ok || !data.success) {
+                        throw new Error(data.message || "La reservation n'a pas pu etre enregistree.");
+                    }
+
+                    notification.style.display = "block";
+                    setTimeout(() => {
+                        window.location.href = "<?= site_url('confirmation'); ?>";
+                    }, 1500);
+                })
+                .catch(() => {
+                    errorNotification.style.display = "block";
+                    setTimeout(() => {
+                        errorNotification.style.display = "none";
+                    }, 2500);
+                });
         });
 
         // Fermer le tableau voyageurs
