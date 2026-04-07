@@ -24,18 +24,64 @@
 </div>
 </main>
 <script>
-function reserver() {
+async function reserver() {
 const date1 = document.getElementById('debut').value;
 const date2 = document.getElementById('fin').value;
-if(!date1 || !date2) {
 const err = document.getElementById('errorNotification');
+const notif = document.getElementById('notification');
+const selectVoyageurs = document.querySelector('select');
+const labelVoyageurs = selectVoyageurs ? (selectVoyageurs.value || '') : '';
+const matchVoyageurs = labelVoyageurs.match(/\d+/);
+const nbpersonne = matchVoyageurs ? parseInt(matchVoyageurs[0], 10) : 1;
+
+if (!date1 || !date2) {
+err.textContent = '❌ Dates manquantes ou incorrectes';
 err.classList.remove('hidden');
 setTimeout(() => err.classList.add('hidden'), 3000);
 return;
 }
-const notif = document.getElementById('notification');
+
+try {
+const response = await fetch('<?= site_url('reservation/create') ?>', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-Requested-With': 'XMLHttpRequest'
+},
+body: JSON.stringify({
+datedebut: date1,
+datefin: date2,
+nbpersonne: nbpersonne,
+pension: 'N',
+typelogement: 'noface4'
+})
+});
+
+const data = await response.json().catch(() => ({}));
+
+if (response.status === 401) {
+window.location.href = '<?= site_url('Connexion') ?>';
+return;
+}
+
+if (!response.ok || !data.success) {
+err.textContent = `❌ ${data.message || 'Impossible d\'enregistrer la réservation.'}`;
+err.classList.remove('hidden');
+setTimeout(() => err.classList.add('hidden'), 3000);
+return;
+}
+
+notif.textContent = '✅ Réservation enregistrée !';
 notif.classList.remove('hidden');
-setTimeout(() => notif.classList.add('hidden'), 3000);
+setTimeout(() => {
+notif.classList.add('hidden');
+window.location.href = '<?= base_url('confirmation') ?>';
+}, 600);
+} catch (error) {
+err.textContent = '❌ Erreur réseau, réessayez.';
+err.classList.remove('hidden');
+setTimeout(() => err.classList.add('hidden'), 3000);
+}
 }
 </script>
 </body>

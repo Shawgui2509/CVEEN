@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+ 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Villa Adèle - Appt 04 | CVVEN</title>
@@ -79,18 +80,65 @@
 </div>
 </main>
 <script>
-function reserver() {
-let debut = document.getElementById("debut").value;
-let fin = document.getElementById("fin").value;
-if(!debut || !fin) {
+async function reserver() {
+const debut = document.getElementById('debut').value;
+const fin = document.getElementById('fin').value;
 const errorNotif = document.getElementById('error');
+const successNotif = document.getElementById('success');
+
+if (!debut || !fin) {
+errorNotif.textContent = '❌ Veuillez sélectionner vos dates.';
 errorNotif.classList.remove('hidden');
 setTimeout(() => errorNotif.classList.add('hidden'), 3000);
 return;
 }
-const successNotif = document.getElementById('success');
+
+const selectVoyageurs = document.querySelector('select');
+const labelVoyageurs = selectVoyageurs ? (selectVoyageurs.value || '') : '';
+const matchVoyageurs = labelVoyageurs.match(/\d+/);
+const nbpersonne = matchVoyageurs ? parseInt(matchVoyageurs[0], 10) : 1;
+
+try {
+const response = await fetch('<?= site_url('reservation/create') ?>', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-Requested-With': 'XMLHttpRequest'
+},
+body: JSON.stringify({
+datedebut: debut,
+datefin: fin,
+nbpersonne: nbpersonne,
+pension: 'N',
+typelogement: 'offre1'
+})
+});
+
+const data = await response.json().catch(() => ({}));
+
+if (response.status === 401) {
+window.location.href = '<?= site_url('Connexion') ?>';
+return;
+}
+
+if (!response.ok || !data.success) {
+errorNotif.textContent = `❌ ${data.message || 'Impossible d\'enregistrer la réservation.'}`;
+errorNotif.classList.remove('hidden');
+setTimeout(() => errorNotif.classList.add('hidden'), 3000);
+return;
+}
+
+successNotif.textContent = '✅ Réservation enregistrée !';
 successNotif.classList.remove('hidden');
-setTimeout(() => successNotif.classList.add('hidden'), 3000);
+setTimeout(() => {
+successNotif.classList.add('hidden');
+window.location.href = '<?= base_url('confirmation') ?>';
+}, 600);
+} catch (error) {
+errorNotif.textContent = '❌ Erreur réseau, réessayez.';
+errorNotif.classList.remove('hidden');
+setTimeout(() => errorNotif.classList.add('hidden'), 3000);
+}
 }
 </script>
 </body>
