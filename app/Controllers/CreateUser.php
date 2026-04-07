@@ -62,3 +62,5 @@ class CreateUser extends Controller
         return view('form/register');
     }
 }
+
+//
