@@ -112,6 +112,17 @@ class SiteReservationModel
         );
     }
 
+    public function deleteCancelledReservationByUser(int $id_reservation, int $id_user): bool
+    {
+        $result = $this->reservations->deleteOne([
+            'id_reservation' => $id_reservation,
+            'id_user' => $id_user,
+            'valide' => ['$in' => ['Annulee', 'Annulée']],
+        ]);
+
+        return $result->getDeletedCount() > 0;
+    }
+
     private function nextReservationId(): int
     {
         $last = $this->reservations->findOne([], ['sort' => ['id_reservation' => -1], 'projection' => ['id_reservation' => 1]]);

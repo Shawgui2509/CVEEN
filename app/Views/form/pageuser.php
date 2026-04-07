@@ -21,7 +21,7 @@
                     <th scope="col">Nombre de personnes</th>
                     <th scope="col">Pension</th>
                     <th scope="col">État de la réservation</th>
-                    <th scope="col">Annuler</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,15 +36,22 @@
                         echo "<td>{$LesReservations['valide']}</td>";
                         echo "<td>";
 
-                        if ($LesReservations['valide'] === "En attente de validation" || $LesReservations['valide'] === "Modifiée") {
-                            echo '<form method="post" action="PageUser">';
+                        if ($LesReservations['valide'] === "En attente de validation" || $LesReservations['valide'] === "Modifiée" || $LesReservations['valide'] === "Modifiee") {
+                            echo '<form method="post" action="'.site_url('PageUser').'">';
                             echo '<input type="hidden" name="idReservation" value="'.$LesReservations['id_reservation'].'">';
-                            echo '<button type="submit" name="supprimer" class="btn btn-danger btn-sm">';
+                            echo '<button type="submit" name="action" value="annuler" class="btn btn-danger btn-sm">';
                             echo '<i class="fa fa-times-circle"></i> Annuler';
                             echo '</button>';
                             echo '</form>';
+                        } elseif ($LesReservations['valide'] === "Annulee" || $LesReservations['valide'] === "Annulée") {
+                            echo '<form method="post" action="'.site_url('PageUser').'" onsubmit="return confirm(\'Supprimer definitivement cette reservation ?\');">';
+                            echo '<input type="hidden" name="idReservation" value="'.$LesReservations['id_reservation'].'">';
+                            echo '<button type="submit" name="action" value="supprimer" class="btn btn-outline-danger btn-sm" title="Supprimer">';
+                            echo '<i class="fa fa-trash"></i>';
+                            echo '</button>';
+                            echo '</form>';
                         } else {
-                            echo '<span class="text-danger">Annulation impossible <i class="fa fa-exclamation-circle"></i></span>';
+                            echo '<span class="text-muted">Aucune action disponible</span>';
                         }
                         
                         echo "</td>";
