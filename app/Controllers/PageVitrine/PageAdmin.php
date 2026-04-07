@@ -30,7 +30,13 @@ class PageAdmin extends BaseController
         if (!empty($idReservation) && is_numeric($idReservation) && in_array($action, ['valider', 'annuler'], true)) {
             $newStatus = $action === 'valider' ? 'Validee' : 'Annulee';
             $this->siteReservationModel->updateisValide($idReservation, $newStatus);
-            return redirect()->to(site_url('PageAdmin'))->with('success', 'Reservation mise a jour avec succes.');
+            $message = $action === 'valider'
+                ? 'Reservation validee avec succes.'
+                : 'Reservation annulee avec succes.';
+
+            return redirect()->to(site_url('PageAdmin'))
+                ->with('banner_type', $action === 'valider' ? 'success' : 'danger')
+                ->with('banner_message', $message);
         }
 
         echo view('template/header', ['iduser' => $this->session->get('id_user')]);

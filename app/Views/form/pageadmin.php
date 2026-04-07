@@ -11,6 +11,14 @@
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Gestion de réservations COUCOU</h1>
+
+    <?php $bannerMessage = session()->getFlashdata('banner_message'); ?>
+    <?php $bannerType = session()->getFlashdata('banner_type') ?? 'success'; ?>
+    <?php if ($bannerMessage): ?>
+        <div class="alert alert-<?= esc($bannerType) ?> text-center fw-bold rounded-0 mb-4" role="alert">
+            <?= esc($bannerMessage) ?>
+        </div>
+    <?php endif; ?>
     
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
