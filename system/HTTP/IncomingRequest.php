@@ -158,7 +158,7 @@ class IncomingRequest extends Request
 	 * @param string|null                 $body
 	 * @param \CodeIgniter\HTTP\UserAgent $userAgent
 	 */
-	public function __construct($config, URI $uri = null, $body = 'php://input', UserAgent $userAgent)
+	public function __construct($config, URI $uri = null, $body = 'php://input', UserAgent $userAgent = null)
 	{
 		// Get our body from php://input
 		if ($body === 'php://input')
@@ -168,7 +168,7 @@ class IncomingRequest extends Request
 
 		$this->body      = $body;
 		$this->config    = $config;
-		$this->userAgent = $userAgent;
+		$this->userAgent = $userAgent ?? new UserAgent();
 
 		parent::__construct($config);
 

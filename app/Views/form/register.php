@@ -1,47 +1,138 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Inscription</title>
+<meta charset="UTF-8">
+<title>Inscription</title>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f5f5f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .form-container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        width: 380px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #d2d2d7;
+        background: #f5f5f7;
+        font-size: 14px;
+        margin-bottom: 12px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    input:focus, select:focus {
+        border-color: #0071e3;
+        background: #fff;
+    }
+
+    button, input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: none;
+        background: #ffffff;
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+        border: 1px solid #d2d2d7;
+        transition: 0.2s;
+    }
+
+    button:hover, input[type="submit"]:hover {
+        background: #f0f0f0;
+    }
+
+    .error {
+        color: red;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .link a {
+        color: #0071e3;
+        text-decoration: none;
+    }
+
+    .link a:hover {
+        text-decoration: underline;
+    }
+</style>
 </head>
+
 <body>
-    <h2>Inscription</h2>
+
+<div style="position:absolute; top:20px; width:100%; text-align:center;">
+    <h1 style="margin:0; font-weight:600;">Inscription</h1>
+</div>
+
+<div class="form-container">
+    <h2>Créer un compte</h2>
 
     <?php if (session()->getFlashdata('error')) : ?>
-        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+        <p class="error"><?= session()->getFlashdata('error') ?></p>
+    <?php endif; ?>
+
+    <?php if (isset($validation)) : ?>
+        <div class="error">
+            <?php if (is_object($validation)) : ?>
+                <?= $validation->listErrors() ?>
+            <?php else : ?>
+                <?= esc($validation) ?>
+            <?php endif; ?>
+        </div>
     <?php endif; ?>
 
     <form action="<?= site_url('CreateUser/register') ?>" method="post">
 
+        <input type="text" name="prenom" placeholder="Prénom" required>
 
-        <label for="prenom">Prénom :</label>
-        <input type="text" name="prenom" required><br>
+        <input type="text" name="nom" placeholder="Nom" required>
 
-        <label for="nom">Nom :</label>
-        <input type="text" name="nom" required><br>
+        <input type="date" name="date_naissance" required>
 
-        <label for="date_naissance">Date de naissance :</label>
-        <input type="date" name="date_naissance" pattern="\d{4}-\d{2}-\d{2}" required>
-
-        <label for="genre">Genre :</label>
         <select name="genre">
-            <option value="">Veuillez sélectionner</option>
+            <option value="">Genre</option>
             <option value="Homme">Homme</option>
             <option value="Femme">Femme</option>
             <option value="Autre">Autre</option>
-        </select><br>
+        </select>
 
-        <label for="email">Email :</label>
-        <input type="email" name="email" required><br>
+        <input type="email" name="email" placeholder="Email" required>
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" name="password" required><br>
+        <input type="password" name="password" placeholder="Mot de passe" required>
 
-        <!-- Correction du bouton d'inscription -->
-        <input type="submit" value="S'inscrire" class="btn btn-primary btn-lg">
+        <input type="submit" value="S'inscrire">
     </form>
 
-    <!-- Ajout d'un lien vers la page de connexion -->
-    <p>Déjà inscrit ? <a href="<?= site_url('Connexion') ?>">Se connecter</a></p>
+    <div class="link">
+        Déjà inscrit ? <a href="<?= site_url('Connexion') ?>">Se connecter</a>
+    </div>
+</div>
+
 </body>
 </html>

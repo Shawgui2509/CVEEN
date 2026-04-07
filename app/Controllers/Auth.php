@@ -1,5 +1,7 @@
 <?php 
-/**namespace App\Controllers;
+
+namespace App\Controllers;
+
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 
