@@ -40,8 +40,22 @@ class UserModel
         $data['role'] = $data['role'] ?? 'user';
         $data['essai'] = $data['essai'] ?? 0;
 
-        $result = $this->collection->insertOne($data);
-        return $result->isAcknowledged();
+        file_put_contents('/var/www/html/writable/logs/insert_debug.log', 
+            date('Y-m-d H:i:s') . " - Tentative d'insertion: " . json_encode($data) . "\n", 
+            FILE_APPEND);
+
+        try {
+            $result = $this->collection->insertOne($data);
+            file_put_contents('/var/www/html/writable/logs/insert_debug.log', 
+                date('Y-m-d H:i:s') . " - Insertion réussie: " . ($result->isAcknowledged() ? 'OUI' : 'NON') . "\n", 
+                FILE_APPEND);
+            return $result->isAcknowledged();
+        } catch (\Exception $e) {
+            file_put_contents('/var/www/html/writable/logs/insert_debug.log', 
+                date('Y-m-d H:i:s') . " - ERREUR: " . $e->getMessage() . "\n", 
+                FILE_APPEND);
+            return false;
+        }
     }
 
     public function emailExists(string $email): bool

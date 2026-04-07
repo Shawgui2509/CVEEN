@@ -8,7 +8,22 @@ services:
       - "8080:80"
     environment:
       CI_ENVIRONMENT: development
-      MONGODB_URI: ${MONGODB_URI:-}
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:27017}
       MONGODB_DATABASE: ${MONGODB_DATABASE:-tp_cven}
     volumes:
       - ./:/var/www/html
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: tp_cven_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: tp_cven
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
