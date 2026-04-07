@@ -35,8 +35,9 @@
     </style>
 </head>
 <body>
+    <?php $isAdmin = session()->get('role') === 'admin'; ?>
     <nav class="navbar">
-        <?php if(isset($iduser) && $iduser == 1) {
+        <?php if(isset($iduser) && $isAdmin) {
             echo anchor('PageAdmin', '🏠 Accueil', 'class="nav-link text-primary"');
         } else {
             echo anchor('/', '🏠 Accueil', 'class="nav-link text-success"');
@@ -46,7 +47,7 @@
             <?php if(isset($iduser)) { ?>
                 <?= anchor('BookForm', '🔍 Rechercher', 'class="nav-link text-success"'); ?>
                 <?= anchor('PageUser', '📌 Mes Réservations', 'class="nav-link text-success"'); ?>
-                <?php if($iduser == 1) { ?>
+                <?php if($isAdmin) { ?>
                     <?= anchor('GestionReservation', '📂 Gérer Réservations', 'class="nav-link text-primary"'); ?>
                     <?= anchor('GestionUser', '👥 Gérer Utilisateurs', 'class="nav-link text-primary"'); ?>
                     <?= anchor('AddUserAdmin', '➕ Ajouter Utilisateur', 'class="nav-link text-primary"'); ?>
