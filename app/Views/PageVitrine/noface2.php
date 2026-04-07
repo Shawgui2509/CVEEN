@@ -1,166 +1,70 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chambre Double2, - Appt 06</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .dropdown { display: none; }
-        .dropdown.active { display: block; }
-        .border-black { border-color: black; }
-        .fixed {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 300px;
-        }
-        .notification {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #4caf50; /* Vert pour le succès */
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-        .error {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #f44336; /* Rouge pour l'erreur */
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chambre Double - Appt 06 | Mers-les-Bains</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+.notification { transition: opacity 0.3s ease; }
+.image-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; height: 400px; }
+@media (max-width: 768px) { .image-grid { grid-template-columns: 1fr; height: auto; } }
+</style>
 </head>
-<body class="bg-gray-100">
-    <div class="notification" id="notification">Réservation réussie !</div>
-    <div class="notification error" id="errorNotification">Réservation Incomplète</div>
-
-    <div class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Left content -->
-        <div class="lg:col-span-2 space-y-6">
-            <h1 class="text-2xl font-bold">Chambre double, - Appt 06</h1>
-
-            <!-- Section des Photos -->
-            <div class="mt-4">
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <img src="<?php echo base_url('img/offre1p.jpg'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 1">
-                    <img src="<?php echo base_url('img/offre2p.jpg'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 2">
-                    <img src="<?php echo base_url('img/offre3p.png'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 3">
-                    <img src="<?php echo base_url('img/offre4p.jpeg'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 4">
-                </div>
-                </div>
-            </div>
-        <br>
-            <p class="text-gray-600">Logement entier · hébergement · Barcelone, Espagne,...</p>
-
-            <div class="flex items-center space-x-4">
-                <span>4 voyageurs</span>
-                <span>· 1 chambre</span>
-                <span>· 2 lits</span>
-                <span>· 1 salle de bain</span>
-            </div>
-
-            <div class="border rounded p-4 bg-white">
-                <p><strong>Hôte :</strong> Compagnie Des Bains Du Nord</p>
-                <p>Superhôte · Hôte depuis 4 ans</p>
-            </div>
-
-            <div class="flex flex-col space-y-2">
-                <div class="flex items-center space-x-2">
-                    <span>🏖️</span><span>À 4 minutes à pied de la plage</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span>🔑</span><span>Arrivée autonome</span>
-                </div>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow mt-6">
-                <h2 class="text-lg font-semibold mb-2">Ce que propose ce logement</h2>
-                <ul class="space-y-1 text-sm">
-                    <li>🌊 Vue sur l'océan</li>
-                    <li>🌅 Vue sur la mer</li>
-                    <li>🏖️ Accès partagé à la plage</li>
-                    <li>🍽️ Cuisine</li>
-                    <li>📶 Wifi</li>
-                    <li><s>🚫 Détecteur de monoxyde de carbone</s></li>
-                </ul>
-                <button class="mt-3 px-4 py-2 border rounded">Afficher les 48 équipements</button>
-            </div>
-        </div>
-
-       
-          
-        </div>
-    </div>
-
-    <!-- Avis et Évaluation Section -->
-    <div class="max-w-7xl mx-auto p-4 mt-10">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold">4,89 - 71 commentaires</h2>
-            <span class="text-gray-500">⭐</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Évaluation globale</span>
-                    <span class="text-gray-500">4,89</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Propriété</span>
-                    <span class="text-gray-500">4,8</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Précision</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Arrivée</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Communication</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Emplacement</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-            </div>
-        </div>
-        <div class="space-y-4 mt-4">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Tristan</span>
-                    <span class="text-gray-500 text-sm">3 ans sur Airbnb</span>
-                </div>
-                <p class="text-gray-600 mt-1">Parfait ! L'appartement est décoré avec beaucoup de goût, la propriété est irréprochable, et la vue sur la mer est un vrai plus, surtout au lever du soleil !</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Hélène</span>
-                    <span class="text-gray-500 text-sm">1 janvier 2025</span>
-                </div>
-                <p class="text-gray-600 mt-1">Parfait ! L'appartement est très agréable, on s'y sent tout de suite bien. Coup de cœur pour Mers les Bains ! Tous les commerces sont accessibles à pied depuis l'appartement.</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Lea</span>
-                    <span class="text-gray-500 text-sm">novembre 2024</span>
-                </div>
-                <p class="text-gray-600 mt-1">Nous avons passé un bon week-end dans ce logement : il est calme, tout proche de la mer et du centre. Je le recommande vivement !</p>
-            </div>
-        </div>
-    </div>
-
-  
-
+<body class="bg-white text-gray-900 font-sans">
+<div id="notification" class="hidden fixed top-5 right-5 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl">✅ Réservation réussie !</div>
+<main class="max-w-6xl mx-auto px-4 py-8">
+<header class="mb-6">
+<h1 class="text-3xl font-semibold">Chambre double, - Appt 06</h1>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center space-x-2 text-sm underline font-medium"><span>⭐ 4,89 · 71 commentaires</span><span>·</span><span>Barcelone, Espagne</span></div>
+</div>
+</header>
+<section class="image-grid rounded-xl overflow-hidden mb-8">
+<div class="grid-span-1 row-span-2"><img src="<?= base_url('img/offre1p.jpg'); ?>" class="w-full h-full object-cover hover:opacity-90 transition cursor-pointer" alt="Main Photo"></div>
+<div class="hidden md:block"><img src="<?= base_url('img/offre2p.jpg'); ?>" class="w-full h-full object-cover hover:opacity-90 transition cursor-pointer" alt="Photo 2"></div>
+<div class="hidden md:block"><img src="<?= base_url('img/offre3p.png'); ?>" class="w-full h-full object-cover hover:opacity-90 transition cursor-pointer" alt="Photo 3"></div>
+</section>
+<div class="flex flex-col lg:flex-row gap-12">
+<div class="lg:w-2/3">
+<div class="border-b pb-6"><h2 class="text-2xl font-semibold">Logement entier proposé par Compagnie Des Bains</h2><p class="text-gray-600">4 voyageurs · 1 chambre · 2 lits · 1 salle de bain</p></div>
+<div class="py-6 border-b space-y-4">
+<div class="flex items-start space-x-4"><span class="text-2xl">🏖️</span><div><p class="font-semibold">Emplacement exceptionnel</p><p class="text-gray-500 text-sm">À 4 minutes à pied de la plage.</p></div></div>
+<div class="flex items-start space-x-4"><span class="text-2xl">🔑</span><div><p class="font-semibold">Arrivée autonome</p><p class="text-gray-500 text-sm">Vous pouvez entrer dans les lieux avec une boîte à clé sécurisée.</p></div></div>
+</div>
+<div class="py-8">
+<h2 class="text-xl font-semibold mb-4">Ce que propose ce logement</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-3">
+<div class="flex items-center space-x-3"><span>🌊</span> <span>Vue sur l'océan</span></div>
+<div class="flex items-center space-x-3"><span>📶</span> <span>Wifi rapide</span></div>
+<div class="flex items-center space-x-3"><span>🍽️</span> <span>Cuisine équipée</span></div>
+<div class="flex items-center space-x-3 text-gray-400 line-through"><span>🚫</span> <span>Détecteur de monoxyde</span></div>
+</div>
+<button class="mt-6 border-2 border-black px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 transition">Afficher les 48 équipements</button>
+</div>
+</div>
+<div class="lg:w-1/3">
+<div class="sticky top-8 border rounded-xl p-6 shadow-xl bg-white">
+<div class="flex justify-between items-center mb-4"><div><span class="text-2xl font-bold">120€</span> <span class="text-gray-600">/ nuit</span></div><div class="text-sm font-semibold">⭐ 4,89</div></div>
+<div class="border rounded-lg mb-4">
+<div class="grid grid-cols-2 border-b">
+<div class="p-3 border-r"><label class="block text-[10px] font-bold uppercase">Arrivée</label><input type="date" class="w-full text-sm outline-none"></div>
+<div class="p-3"><label class="block text-[10px] font-bold uppercase">Départ</label><input type="date" class="w-full text-sm outline-none"></div>
+</div>
+<div class="p-3"><label class="block text-[10px] font-bold uppercase">Voyageurs</label><select class="w-full text-sm outline-none bg-transparent"><option>1 voyageur</option><option selected>4 voyageurs</option></select></div>
+</div>
+<button onclick="reserver()" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-lg transition duration-200">Réserver</button>
+<p class="text-center text-gray-500 text-sm mt-4">Aucun montant ne vous sera débité pour le moment</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+function reserver() {
+const notif = document.getElementById('notification');
+notif.classList.remove('hidden');
+setTimeout(() => { notif.classList.add('hidden'); }, 3000);
+}
+</script>
 </body>
 </html>
