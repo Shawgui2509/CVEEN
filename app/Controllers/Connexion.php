@@ -7,6 +7,11 @@ use App\Models\UserModel;
 
 class Connexion extends Controller
 {
+    private function isAdminRole($role): bool
+    {
+        return strtolower(trim((string) $role)) === 'admin';
+    }
+
     public function index()
     {
         helper(['form', 'url']);
@@ -14,7 +19,8 @@ class Connexion extends Controller
 
         // Vérification si l'utilisateur est déjà connecté
         if ($session->has('id_user')) {
-            return redirect()->to(site_url('PageUser'));
+            $destination = $this->isAdminRole($session->get('role')) ? 'PageAdmin' : 'PageUser';
+            return redirect()->to(site_url($destination));
         }
 
         // Vérification si le formulaire est soumis
@@ -31,7 +37,8 @@ class Connexion extends Controller
 
             // Vérification des identifiants
             if ($this->verifyLoginPassword()) {
-                return redirect()->to(site_url('PageUser')); // Redirection en cas de succès
+                $destination = $this->isAdminRole($session->get('role')) ? 'PageAdmin' : 'PageUser';
+                return redirect()->to(site_url($destination)); // Redirection en cas de succès
             } else {
                 return view('template/header')
                     . view('form/login', ['validation' => 'Email ou mot de passe incorrect.']);
@@ -63,11 +70,14 @@ class Connexion extends Controller
             return false; // Identifiants incorrects
         }
 
+        $role = $this->isAdminRole($user['role'] ?? 'user') ? 'admin' : 'user';
+
         // Stockage des informations de l'utilisateur en session
         $session->set([
             'id_user'   => $user['id_user'],
             'nom'       => $user['nom'],
             'email'     => $user['email'],
+            'role'      => $role,
             'logged_in' => true
         ]);
 

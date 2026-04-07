@@ -1,165 +1,144 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Villa Adèle1, - Appt 04</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .dropdown { display: none; }
-        .dropdown.active { display: block; }
-        .border-black { border-color: black; }
-        .fixed {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 300px;
-        }
-        .notification {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #4caf50; /* Vert pour le succès */
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-        .error {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #f44336; /* Rouge pour l'erreur */
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Villa Adèle - Appt 04 | CVVEN</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+.notification { transition: opacity 0.3s ease; }
+.image-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; height: 450px; }
+@media (max-width: 768px) { .image-grid { grid-template-columns: 1fr; height: auto; } }
+</style>
 </head>
-<body class="bg-gray-100">
-    <div class="notification" id="notification">Réservation réussie !</div>
-    <div class="notification error" id="errorNotification">Réservation Incomplète</div>
+<body class="bg-white text-gray-900 font-sans">
+<div id="success" class="hidden fixed top-5 right-5 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl">✅ Réservation réussie !</div>
+<div id="error" class="hidden fixed top-5 right-5 z-50 bg-red-600 text-white px-6 py-3 rounded-lg shadow-xl">❌ Veuillez sélectionner vos dates.</div>
+<nav class="border-b px-6 py-4 mb-8">
+<div class="max-w-6xl mx-auto flex justify-between items-center">
+<a href="/" class="text-[#ff385c] font-bold text-xl">🏨 CVVEN</a>
+<a href="/" class="text-sm font-semibold hover:underline">Retour à l'accueil</a>
+</div>
+</nav>
+<main class="max-w-6xl mx-auto px-4">
+<header class="mb-6">
+<h1 class="text-3xl font-semibold">🏡 Villa Adèle - Appt 04</h1>
+<div class="flex items-center space-x-2 text-sm mt-2 font-medium underline">
+<span>⭐ 4,89 · 71 commentaires</span>
+<span>·</span>
+<span>Rome, Italie</span>
+</div>
+</header>
+<section class="image-grid rounded-2xl overflow-hidden mb-10 shadow-sm">
+<div class="grid-span-1 row-span-2 overflow-hidden">
+<img src="<?= base_url('img/offre1v.jpg'); ?>" class="w-full h-full object-cover hover:scale-105 transition duration-500 cursor-pointer" alt="Main Photo">
+</div>
+<div class="hidden md:block overflow-hidden">
+<img src="<?= base_url('img/offre2v.jpg'); ?>" class="w-full h-full object-cover hover:scale-105 transition duration-500 cursor-pointer" alt="Photo 2">
+</div>
+<div class="hidden md:block overflow-hidden">
+<img src="<?= base_url('img/offre3v.jpg'); ?>" class="w-full h-full object-cover hover:scale-105 transition duration-500 cursor-pointer" alt="Photo 3">
+</div>
+</section>
+<div class="flex flex-col lg:flex-row gap-12">
+<div class="lg:w-2/3">
+<div class="border-b pb-6">
+<h2 class="text-2xl font-semibold">Logement entier proposé par Compagnie Des Bains Du Nord</h2>
+<p class="text-gray-600 mt-1 text-lg">4 voyageurs · 1 chambre · 2 lits · 1 salle de bain</p>
+</div>
+<div class="py-8 border-b space-y-6">
+<div class="flex items-start space-x-4"><span class="text-2xl">🏆</span><div><p class="font-semibold text-lg">Compagnie est Superhôte</p><p class="text-gray-500 text-sm">Les Superhôtes sont des hôtes expérimentés qui bénéficient d'excellentes évaluations.</p></div></div>
+<div class="flex items-start space-x-4"><span class="text-2xl">🏖️</span><div><p class="font-semibold text-lg">Emplacement de rêve</p><p class="text-gray-500 text-sm">À seulement 4 minutes de la plage à pied.</p></div></div>
+<div class="flex items-start space-x-4"><span class="text-2xl">🔑</span><div><p class="font-semibold text-lg">Arrivée autonome</p><p class="text-gray-500 text-sm">Accédez au logement par une boîte à clé sécurisée.</p></div></div>
+</div>
+<div class="py-8 border-b">
+<h2 class="text-xl font-semibold mb-6">Ce que propose ce logement</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+<div class="flex items-center space-x-4"><span>🌊</span> <span>Vue mer & océan</span></div>
+<div class="flex items-center space-x-4"><span>🍽️</span> <span>Cuisine équipée</span></div>
+<div class="flex items-center space-x-4"><span>📶</span> <span>Wifi haut débit</span></div>
+<div class="flex items-center space-x-4"><span>🏖️</span> <span>Accès direct plage</span></div>
+<div class="flex items-center space-x-4 text-gray-400 line-through"><span>🚫</span> <span>Détecteur CO2</span></div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/3">
+<div class="sticky top-8 border rounded-2xl p-6 shadow-2xl bg-white border-gray-200">
+<div class="flex justify-between items-end mb-6"><div><span class="text-2xl font-bold">150€</span><span class="text-gray-600 text-sm">/ nuit</span></div><div class="text-sm font-semibold">⭐ 4,89</div></div>
+<div class="border rounded-xl mb-4 overflow-hidden">
+<div class="grid grid-cols-2 border-b">
+<div class="p-3 border-r hover:bg-gray-50 cursor-pointer"><label class="block text-[10px] font-bold uppercase text-gray-700">Arrivée</label><input type="date" id="debut" class="w-full text-sm outline-none bg-transparent"></div>
+<div class="p-3 hover:bg-gray-50 cursor-pointer"><label class="block text-[10px] font-bold uppercase text-gray-700">Départ</label><input type="date" id="fin" class="w-full text-sm outline-none bg-transparent"></div>
+</div>
+<div class="p-3"><label class="block text-[10px] font-bold uppercase text-gray-700">Voyageurs</label><select class="w-full text-sm outline-none bg-transparent"><option>4 voyageurs</option><option>3 voyageurs</option><option>2 voyageurs</option></select></div>
+</div>
+<button onclick="reserver()" class="w-full bg-[#ff385c] hover:bg-[#e60042] text-white font-bold py-3 rounded-xl transition duration-200 shadow-md">Réserver</button>
+<div class="mt-4 flex justify-between font-semibold text-gray-800 border-t pt-4"><span>Total (hors frais)</span><span id="total">150€</span></div>
+</div>
+</div>
+</div>
+</main>
+<script>
+async function reserver() {
+const debut = document.getElementById('debut').value;
+const fin = document.getElementById('fin').value;
+const errorNotif = document.getElementById('error');
+const successNotif = document.getElementById('success');
 
-    <div class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Left content -->
-        <div class="lg:col-span-2 space-y-6">
-            <h1 class="text-2xl font-bold">Villa Adèle, - Appt 04</h1>
+if (!debut || !fin) {
+errorNotif.textContent = '❌ Veuillez sélectionner vos dates.';
+errorNotif.classList.remove('hidden');
+setTimeout(() => errorNotif.classList.add('hidden'), 3000);
+return;
+}
 
-            <!-- Section des Photos -->
-            <div class="mt-4">
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <img src="<?php echo base_url('img/offre1v.jpg'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 1">
-                    <img src="<?php echo base_url('img/offre2v.jpg'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 2">;
-                    <img src="<?php echo base_url('img/offre3v.jpg'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 3">
-                    <img src="<?php echo base_url('img/offre4v.jpg'); ?>" class="w-full h-auto rounded-lg shadow" alt="Photo 4">
-                </div>
-            </div>
+const selectVoyageurs = document.querySelector('select');
+const labelVoyageurs = selectVoyageurs ? (selectVoyageurs.value || '') : '';
+const matchVoyageurs = labelVoyageurs.match(/\d+/);
+const nbpersonne = matchVoyageurs ? parseInt(matchVoyageurs[0], 10) : 1;
 
-            <p class="text-gray-600">Logement entier · hébergement · Rome, Italie,...</p>
+try {
+const response = await fetch('<?= site_url('reservation/create') ?>', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-Requested-With': 'XMLHttpRequest'
+},
+body: JSON.stringify({
+datedebut: debut,
+datefin: fin,
+nbpersonne: nbpersonne,
+pension: 'N',
+typelogement: 'noface1'
+})
+});
 
-            <div class="flex items-center space-x-4">
-                <span>4 voyageurs</span>
-                <span>· 1 chambre</span>
-                <span>· 2 lits</span>
-                <span>· 1 salle de bain</span>
-            </div>
+const data = await response.json().catch(() => ({}));
 
-            <div class="border rounded p-4 bg-white">
-                <p><strong>Hôte :</strong> Compagnie Des Bains Du Nord</p>
-                <p>Superhôte · Hôte depuis 4 ans</p>
-            </div>
+if (response.status === 401) {
+window.location.href = '<?= site_url('Connexion') ?>';
+return;
+}
 
-            <div class="flex flex-col space-y-2">
-                <div class="flex items-center space-x-2">
-                    <span>🏖️</span><span>À 4 minutes à pied de la plage</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span>🔑</span><span>Arrivée autonome</span>
-                </div>
-            </div>
+if (!response.ok || !data.success) {
+errorNotif.textContent = `❌ ${data.message || 'Impossible d\'enregistrer la réservation.'}`;
+errorNotif.classList.remove('hidden');
+setTimeout(() => errorNotif.classList.add('hidden'), 3000);
+return;
+}
 
-            <div class="bg-white p-4 rounded-lg shadow mt-6">
-                <h2 class="text-lg font-semibold mb-2">Ce que propose ce logement</h2>
-                <ul class="space-y-1 text-sm">
-                    <li>🌊 Vue sur l'océan</li>
-                    <li>🌅 Vue sur la mer</li>
-                    <li>🏖️ Accès partagé à la plage</li>
-                    <li>🍽️ Cuisine</li>
-                    <li>📶 Wifi</li>
-                    <li><s>🚫 Détecteur de monoxyde de carbone</s></li>
-                </ul>
-                <button class="mt-3 px-4 py-2 border rounded">Afficher les 48 équipements</button>
-            </div>
-        </div>
-
-       
-          
-        </div>
-    </div>
-
-    <!-- Avis et Évaluation Section -->
-    <div class="max-w-7xl mx-auto p-4 mt-10">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold">4,89 - 71 commentaires</h2>
-            <span class="text-gray-500">⭐</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Évaluation globale</span>
-                    <span class="text-gray-500">4,89</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Propriété</span>
-                    <span class="text-gray-500">4,8</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Précision</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Arrivée</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Communication</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Emplacement</span>
-                    <span class="text-gray-500">4,9</span>
-                </div>
-            </div>
-        </div>
-        <div class="space-y-4 mt-4">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Tristan</span>
-                    <span class="text-gray-500 text-sm">3 ans sur Airbnb</span>
-                </div>
-                <p class="text-gray-600 mt-1">Parfait ! L'appartement est décoré avec beaucoup de goût, la propriété est irréprochable, et la vue sur la mer est un vrai plus, surtout au lever du soleil !</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Hélène</span>
-                    <span class="text-gray-500 text-sm">1 janvier 2025</span>
-                </div>
-                <p class="text-gray-600 mt-1">Parfait ! L'appartement est très agréable, on s'y sent tout de suite bien. Coup de cœur pour Mers les Bains ! Tous les commerces sont accessibles à pied depuis l'appartement.</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between">
-                    <span class="font-bold">Lea</span>
-                    <span class="text-gray-500 text-sm">novembre 2024</span>
-                </div>
-                <p class="text-gray-600 mt-1">Nous avons passé un bon week-end dans ce logement : il est calme, tout proche de la mer et du centre. Je le recommande vivement !</p>
-            </div>
-        </div>
-    </div>
-
-  
-
+successNotif.textContent = '✅ Réservation enregistrée !';
+successNotif.classList.remove('hidden');
+setTimeout(() => {
+successNotif.classList.add('hidden');
+window.location.href = '<?= base_url('confirmation') ?>';
+}, 600);
+} catch (error) {
+errorNotif.textContent = '❌ Erreur réseau, réessayez.';
+errorNotif.classList.remove('hidden');
+setTimeout(() => errorNotif.classList.add('hidden'), 3000);
+}
+}
+</script>
 </body>
 </html>

@@ -23,10 +23,20 @@ class PageUser extends BaseController
             return redirect()->to(site_url('Connexion'));
         }
 
-        // Récupération et validation de l'ID réservation
+        // Actions utilisateur sur une reservation
         $idReservation = $this->request->getPost('idReservation');
+        $action = $this->request->getPost('action');
         if (!empty($idReservation) && is_numeric($idReservation)) {
-            $this->siteReservationModel->updateisValide($idReservation, "Annulée");
+            $reservationId = (int) $idReservation;
+            $userId = (int) $this->session->get('id_user');
+
+            if ($action === 'annuler') {
+                $this->siteReservationModel->updateisValide($reservationId, 'Annulee');
+            }
+
+            if ($action === 'supprimer') {
+                $this->siteReservationModel->deleteCancelledReservationByUser($reservationId, $userId);
+            }
         }
 
         // Chargement des vues avec les données utilisateur

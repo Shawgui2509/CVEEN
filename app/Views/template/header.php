@@ -17,46 +17,8 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fff;
-            padding: 15px 50px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            margin-left: 15px;
-        }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <?php if(isset($iduser) && $iduser == 1) {
-            echo anchor('PageAdmin', '🏠 Accueil', 'class="nav-link text-primary"');
-        } else {
-            echo anchor('/', '🏠 Accueil', 'class="nav-link text-success"');
-        } ?>
-         
-        <div>
-            <?php if(isset($iduser)) { ?>
-                <?= anchor('BookForm', '🔍 Rechercher', 'class="nav-link text-success"'); ?>
-                <?= anchor('PageUser', '📌 Mes Réservations', 'class="nav-link text-success"'); ?>
-                <?php if($iduser == 1) { ?>
-                    <?= anchor('GestionReservation', '📂 Gérer Réservations', 'class="nav-link text-primary"'); ?>
-                    <?= anchor('GestionUser', '👥 Gérer Utilisateurs', 'class="nav-link text-primary"'); ?>
-                    <?= anchor('AddUserAdmin', '➕ Ajouter Utilisateur', 'class="nav-link text-primary"'); ?>
-                <?php } ?>
-                <?= anchor('ModifyPassword', '⚙️ Paramètres', 'class="nav-link text-warning"'); ?>
-                <?= anchor('Connexion/deconnexion', '🚪 Déconnexion', 'class="nav-link text-danger"'); ?>
-            <?php } else { ?>
-                <?= anchor('Connexion', '🔐Connexion', 'class="nav-link text-success"'); ?>
-            <?php } ?>
-        </div>
-    </nav>
 </body>
 </html>
